@@ -11,20 +11,20 @@ class ArticleSerializer(serializers.Serializer):
     location = serializers.CharField()
     publication_date = serializers.DateField()
     active = serializers.BooleanField()
-    created_at = serializers.DataTimeField(read_only=True)
-    updated_at = serializers.DataTimeField(read_only=True)
+    created_at = serializers.DateTimeField(read_only=True)
+    updated_at = serializers.DateTimeField(read_only=True)
 
     def create(self, validated_data):
         print(validated_data)
-        return Article.objrcts.create(**validated_data)
+        return Article.objects.create(**validated_data)
 
-    def update(self, instance, validated_date):
-        instance.author = validated_data.get('author', insance.author)
-        instance.title = validated_data.get('title', insance.title)
-        instance.description = validated_data.get('description', insance.description)
-        instance.body = validated_data.get('body', insance.body)
-        instance.location = validated_data.get('location', insance.location)
-        instance.publication_date = validated_data.get('publication_date', insance.publication_date)
-        instance.active = validated_data.get('active', insance.active)
+    def update(self, instance, validated_data):
+        instance.author = validated_data.get('author', instance.author)
+        instance.title = validated_data.get('title', instance.title)
+        instance.description = validated_data.get('description', instance.description)
+        instance.body = validated_data.get('body', instance.body)
+        instance.location = validated_data.get('location', instance.location)
+        instance.publication_date = validated_data.get('publication_date', instance.publication_date)
+        instance.active = validated_data.get('active', instance.active)
         instance.save()
         return instance
